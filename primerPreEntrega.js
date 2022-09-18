@@ -1,62 +1,3 @@
-/*const usuario = "admin"
-const password = "12345678"
-alert("Buen día! Bienvenido a nuestro sitio web de compras de HP, antes de comenzar debe iniciar sesión")
-do {
-    let login = prompt("Ingrese su usuario:")
-    if (login != usuario) {
-        alert("Usuario incorrecto")
-    }
-} while (login != usuario);
-function menuDeVaritas(){
-    let opcion = Number(prompt(`Seleccione una varita para ver los detalles:
-1.- Harry Potter
-2.- Hermione Granger
-3.- Ron Weasley
-4.- Salir`))
-    switch (opcion) {
-        case 1:
-            let opcion1= prompt(` Descripción:
-            ${varita1.nombre}
-            ${varita1.longitud}
-            $ ${varita1.precio}
-    
-            1.- Agregar al carrito
-            2.- Volver`)
-            agragarOVolver(opcion1)
-            break;
-        case 2:
-            let opcion2= prompt(` Descripción:
-            ${varita2.nombre}
-            ${varita2.longitud}
-            $ ${varita2.precio}
-    
-            1.- Agregar al carrito
-            2.- Volver`)
-            agragarOVolver(opcion2)
-            break;
-        case 3:
-            let opcion3= prompt(` Descripción:
-            ${varita3.nombre}
-            ${varita3.longitud}
-            $ ${varita3.precio}
-        
-            1.- Agregar al carrito
-            2.- Volver`)
-            agragarOVolver(opcion3)
-            break;
-        case 4:
-            alert("Muchas gracias por su visita")
-            break
-        default:
-            alert("Opción incorrecta, intente nuevamente")
-            menuDeVaritas()
-            break;
-    }
-}
-*/
-
-//productos disponibles
-
 function Producto (id, nombre, longitud, precio){
     this.id = id;
     this.nombre = nombre;
@@ -107,6 +48,7 @@ let opcion = Number(prompt(`Seleccione una varita para ver los detalles:
 switch (opcion) {
     case 1:
         datosVarita(1)
+        break
     case 2:
         datosVarita(2)
         break;
@@ -114,17 +56,14 @@ switch (opcion) {
         datosVarita(3)
         break;
     case 4:
-        let opcion = prompt(`El total de su compra es de ${totalCarrito(carrito)}
+        let siONo = Number(prompt(`El total de su compra es de ${totalCarrito(carrito)}
         Desea confirmar la compra?
         1.- Si
-        2.- No`)
-        if (opcion == 1) {
-            alert("Muchas gracias por su compra! Será reedirigido al sitio de pago.")
-        } else {
-            menuDeVaritas()
-        }
+        2.- No`))
+        salirOVolver(siONo)
+        break
     case 5:
-        alert("Muchas gracias por su visita")
+        final()
         break
     default:
         alert("Opción incorrecta, intente nuevamente")
@@ -137,10 +76,6 @@ function agregarCarrito(id){
 let producto = varitas.find(product=>product.id===id)
 alert("Producto añadido al carrito satisfactoriamente")
 carrito.push(producto)
-}
-
-function agragarOVolver(opcion){
-
 }
 
 function saludar(){
@@ -156,6 +91,25 @@ carrito.forEach(element => {
     total += element.precio
 });
 return total
+}
+
+function final() {
+alert("Gracias por su visita!")
+}
+
+function salirOVolver(opcion) {
+switch (opcion) {
+    case 1:
+        alert("Muchas gracias por su compra! Será reedirigido al sitio de pago.")
+        final()
+        break;
+    case 2:
+        menuDeVaritas()
+        break;
+    default:
+        alert("Opción incorrecta")
+        break;
+}
 }
 
 saludar()
