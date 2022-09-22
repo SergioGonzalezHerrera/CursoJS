@@ -134,3 +134,21 @@ productos.forEach((producto)=>{
     cardClone.children[1].innerText = producto.detalle
     cardClone.children[2].innerText = `$ ${producto.precio}`
 })
+
+//toma solo el click de la primer card
+let agregarAlCarritoBtn = document.querySelector("#agregarAlCarrito")
+agregarAlCarritoBtn.onclick = () => {
+    console.log("hice click")
+}
+
+//a fin de cumpli con el desafio una función que cumpla con el objetivo
+
+let divSaludo = document.querySelector("#saludo")
+let formulario = document.querySelector("#formulario")
+formulario.addEventListener("submit", saludarFormulario)
+
+function saludarFormulario(e){
+    e.preventDefault()
+    let formulario = e.target
+    divSaludo.innerText = ` Bienvenido ${formulario.children[0].value} ${formulario.children[1].value} ` ;
+}
