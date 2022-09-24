@@ -8,9 +8,9 @@ function Producto(id, img, nombre, detalle, precio) {
 }
 //creacion de un "stock" "inventario"
 let productos = [
-    new Producto(1, "", "Varita Harry Potter", "28 centímetros", 5500),
-    new Producto(2, "", "Varita Hermione Granger", "27,3 centímetros", 5000),
-    new Producto(3, "", "Varita Ron Weasley", "30,48 centímetros", 4500),
+    new Producto(1, "../image/varitaHarryPotter.jpg", "Varita Harry Potter", "28 centímetros", 5500),
+    new Producto(2, "../image/varitaHermioneGranger.jpg", "Varita Hermione Granger", "27,3 centímetros", 5000),
+    new Producto(3, "../image/varitaRonWeasley.jpg", "Varita Ron Weasley", "30,48 centímetros", 4500),
 ]
 //carrito es un array y arranca vacio porque luego va a tener dentros los productos que elija el cliente
 const carrito = [
@@ -25,7 +25,7 @@ function datosVarita(id) {
     
     1.- Agregar al carrito
     2.- Volver`)
-//luego dentro de la misma función da la opción de agregar al carrito o volver, esto luego tendré que separarlo en dos funciones distintas.
+    //luego dentro de la misma función da la opción de agregar al carrito o volver, esto luego tendré que separarlo en dos funciones distintas.
     if (opcion == 1) {
         agregarCarrito(id)
         menuDeVaritas()
@@ -122,18 +122,28 @@ function salirOVolver(opcion) {
     }
 }
 
-let catalogo = document.querySelector("#catalogoProductos")
-let template = document.querySelector("#plantillaCardPorductos")
-let card = template.content.querySelector("#cardProductos")
+const mostrarCatalogo = (productos) => {
+    let catalogo = document.querySelector("#catalogoProductos")
+    productos.forEach( producto => {
+        let card = document.createElement('card')
+        card.innerHTML += `<div class="card" style="width: 18rem;">
+                                <img src="${producto.img}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${producto.nombre}</h5>
+                                    <p class="card-text">${producto.detalle}</p>
+                                    <p class="card-text">$ ${producto.precio}</p>
+                                    <a id="boton${producto.id}" class="btn btn-primary">Agregar al carrito</a>
+                                </div>
+                            </div>`
+        catalogo.appendChild(card)
+        let boton = document.querySelector(`#boton${producto.id}`)
+        boton.addEventListener('click', () => {
+            alert(`${producto.nombre} fue agregado al carrito.`)
+        })
+    })
+}
 
-productos.forEach((producto)=>{
-    let cardClone = card.cloneNode(true)
-    catalogo.appendChild(cardClone)
-
-    cardClone.children[0].innerText = producto.nombre
-    cardClone.children[1].innerText = producto.detalle
-    cardClone.children[2].innerText = `$ ${producto.precio}`
-})
+mostrarCatalogo(productos)
 
 //toma solo el click de la primer card
 let agregarAlCarritoBtn = document.querySelector("#agregarAlCarrito")
@@ -143,12 +153,12 @@ agregarAlCarritoBtn.onclick = () => {
 
 //a fin de cumpli con el desafio una función que cumpla con el objetivo
 
-let divSaludo = document.querySelector("#saludo")
-let formulario = document.querySelector("#formulario")
-formulario.addEventListener("submit", saludarFormulario)
+// let divSaludo = document.querySelector("#saludo")
+// let formulario = document.querySelector("#formulario")
+// formulario.addEventListener("submit", saludarFormulario)
 
-function saludarFormulario(e){
-    e.preventDefault()
-    let formulario = e.target
-    divSaludo.innerText = ` Bienvenido ${formulario.children[0].value} ${formulario.children[1].value} ` ;
-}
+// function saludarFormulario(e) {
+//     e.preventDefault()
+//     let formulario = e.target
+//     divSaludo.innerText = ` Bienvenido ${formulario.children[0].value} ${formulario.children[1].value} `;
+// }
