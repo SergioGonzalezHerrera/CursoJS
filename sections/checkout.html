@@ -32,7 +32,7 @@
                 </ul>
             </nav>
             <div class="shopping-bag">
-                <a href="">
+                <a href="./cart.html">
                     <img src="./icons/bag.png" alt="cart">
                     Carrito
                     <div class="total-items-in-cart">
@@ -64,8 +64,8 @@
                 <div class="subtotal">
                     Subtotal (0 productos): $0
                 </div>
-                <div class="checkout" onclick="finalizarCompra()">
-                    Finalizar la compra
+                <div class="checkout">
+                    <a href="./sections/checkout.html">Finalizar la compra</a> 
                 </div>
             </div>
         </div>
@@ -74,13 +74,12 @@
     <script>
         const porductsListEl = document.querySelector(".products-list");
         const seeMoreBtn = document.querySelector(".see-more-btn");
+
         seeMoreBtn.addEventListener('click', () => {
             porductsListEl.scrollIntoView({behavior: "smooth"})
         })
     </script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> 
-    <script src="./productos.js"></script>
-    <script src="./app.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

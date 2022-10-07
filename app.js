@@ -46,6 +46,13 @@ function agregarAlCarrito(id) {
       ...item,
       unidades: 1,
     });
+    Toastify({
+      text: `${item.nombre} se ha añadido al carrito`,
+      duration: 2000,
+      style: {
+        background: "linear-gradient(to right, #c50000, #ffa700)",
+      },
+      }).showToast();
   }
 
   actualizarCarrito();
@@ -99,7 +106,6 @@ function mostrarProductosCarrito() {
 
 function quitarDelCarrito(id) {
   carrito = carrito.filter((item) => item.id !== id);
-
   actualizarCarrito();
 }
 
@@ -110,8 +116,22 @@ function sumarRestarUnidades(action, id) {
     if (item.id === id) {
       if (action === "restar" && unidades > 1) {
         unidades--;
+        Toastify({
+          text: `${item.nombre} se ha quitado una unidad`,
+          duration: 2000,
+          style: {
+            background: "linear-gradient(to right, #c50000, #ffa700)",
+          },
+          }).showToast();
       } else if (action === "sumar" && unidades < item.stock) {
         unidades++;
+        Toastify({
+          text: `${item.nombre} se ha añadido una unidad`,
+          duration: 2000,
+          style: {
+            background: "linear-gradient(to right, #c50000, #ffa700)",
+          },
+          }).showToast();
       }
     }
 
@@ -124,6 +144,19 @@ function sumarRestarUnidades(action, id) {
   actualizarCarrito();
 }
 
+function finalizarCompra(){
+  const { value: email } = Swal.fire({
+    title: 'Ingrese su e-mail',
+    input: 'email',
+    inputLabel: 'Su e-mail',
+    inputPlaceholder: 'usuario@usuario.com'
+  })
+  
+  if (email) {
+    Swal.fire(`Muchas gracias por su compra, nos comunicaremos a ${email} para brindarle detalles de pago y envio`)
+  }
+  // el mensaje final no aparece creo que porque no esta el "await", tengo que ver la clase de async para aplicarlo.
+}
 
 //falta el contenido del inicio
 //falta un mensaje de "despedida" cuando termina la compra
