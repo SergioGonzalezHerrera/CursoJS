@@ -2,8 +2,19 @@ const productosDOM = document.querySelector(".products");
 const productosCarrito = document.querySelector(".cart-items");
 const subtotal = document.querySelector(".subtotal");
 const productosTotal = document.querySelector(".total-items-in-cart");
+let productos = []
 
-// funcion que carga los productos de productos.js al HTML
+async function fetchAlJson() {
+  const respuesta = await fetch('./productos.json')
+  return await respuesta.json()
+}
+
+fetchAlJson().then(products => {
+  productos=products
+  cargarProdcutos()
+})
+
+// funcion que carga los productos
 function cargarProdcutos() {
   productos.forEach((product) => {
     productosDOM.innerHTML += `
@@ -31,7 +42,7 @@ cargarProdcutos();
 
 // Array carrito
 let carrito = JSON.parse(localStorage.getItem("CARRITO")) || [];
-// toma los elementos del localStorage OR devuelve un array vacio
+// toma los elementos del localStorage si no devuelve un array vacio
 actualizarCarrito();
 
 // agregar al carrito
@@ -144,20 +155,17 @@ function sumarRestarUnidades(action, id) {
   actualizarCarrito();
 }
 
-function finalizarCompra(){
-  const { value: email } = Swal.fire({
+async function finalizarCompra(){
+  const { value: email } = await Swal.fire({
     title: 'Ingrese su e-mail',
     input: 'email',
     inputLabel: 'Su e-mail',
-    inputPlaceholder: 'usuario@usuario.com'
+    inputPlaceholder: 'usuario@mail.com'
   })
   
   if (email) {
     Swal.fire(`Muchas gracias por su compra, nos comunicaremos a ${email} para brindarle detalles de pago y envio`)
   }
-  // el mensaje final no aparece creo que porque no esta el "await", tengo que ver la clase de async para aplicarlo.
 }
 
 //falta el contenido del inicio
-//falta un mensaje de "despedida" cuando termina la compra
-//hay que sacar el "link" del número de objetos dentro de carrito
