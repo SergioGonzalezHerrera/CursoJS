@@ -43,7 +43,7 @@ a {
   z-index: -1;
 }
 .app-bg .left-side {
-  background-color: rgb(0, 0, 0);
+  background-color: black;
   width: 75%;
   height: 100%;
 }
@@ -122,7 +122,7 @@ header nav ul li.home a img {
 /* MAIN */
 main {
   width: 100%;
-  background-color: #7F0909;
+  background-color: none;
   position: relative;
   top: 100px;
 }
@@ -400,4 +400,13 @@ main .model {
   background-color: #c50000;
 
   cursor: pointer;
+}
+main h1{
+  background-color: none;
+  color: white;
+  margin: 100px;
+}
+main h2{
+  color: white;
+  margin: 100px;
 }
